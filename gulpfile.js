@@ -43,13 +43,13 @@ gulp.task("site-watch", function() {
 gulp.task("dev-server", function(callback) {
   gulp.start("site-sass");
   gulp.start("site-watch");
-
+  console.log("View site at http://localhost:3000/website/");
   // Start a webpack-dev-server
   new WebpackDevServer(webpack(webpackConfig), {
     stats: {
       colors: true
     }
-  }).listen(8080, "localhost", function(err) {
-    if(err) throw new gutil.PluginError("webpack-dev-server", err);
+  }).listen(3000, "localhost", function(err) {
+    if(err) { throw new gutil.PluginError("webpack-dev-server", err) };
   });
 });

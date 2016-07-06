@@ -24,6 +24,7 @@ export default class ImageBlock extends Component {
 
     this._handleCaptionChange = ::this._handleCaptionChange;
     this._handleRightsHolderChange = ::this._handleRightsHolderChange;
+    this._handleEdit = ::this._handleEdit;
 
     this.actions = [
       {"key": "crop", "icon": icons.CropIcon, "action": this._handleCrop},
@@ -35,7 +36,16 @@ export default class ImageBlock extends Component {
   _handleCrop() {
   }
 
-  _handleEdit() {
+  _handleEdit (event) {
+    event.preventDefault();
+    const currentSrc = this.props.data.src;
+    const src = window.prompt("Enter a URL", currentSrc);
+    if (!src) {
+      return;
+    }
+
+    this.props.container.updateEntity({src});
+
   }
 
   _handleCaptionChange(event) {
