@@ -59,9 +59,23 @@ export default class Media extends Component {
   updateEntity(data) {
     // Entity doesn't change editor state
     // We have to merge data, update the local state and refresh the editor state
+    console.log("=> updateEntity(data)", data);
     const newEntity = Entity.mergeData(this.entityKey, data);
     this.setState({entityData: newEntity.getData()});
     this._refreshEditor();
+  }
+
+  mediaWidth(featured) {
+    let width = "100%";
+    switch(featured) {
+      case "small":
+        width = "50%";
+        break;
+      case "medium":
+        width = "75%";
+        break;
+    }
+    return {maxWidth: width};
   }
 
   render() {
@@ -69,7 +83,7 @@ export default class Media extends Component {
     const {plugin, setReadOnly} = this.props.blockProps;
     const Block = plugin.blockComponent;
     return (
-      <MediaWrapper setReadOnly={setReadOnly}>
+      <MediaWrapper setReadOnly={setReadOnly} style={this.mediaWidth(data.featured)}>
         <Block data={data} container={this} blockProps={this.props.blockProps} />
       </MediaWrapper>
     );

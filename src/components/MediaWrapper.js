@@ -17,16 +17,18 @@ export default class MediaWrapper extends Component {
   }
 
   _handleFocus() {
+    console.log("MediaWrapper:_handleFocus");
     this.props.setReadOnly(true);
   }
 
   _handleBlur() {
+    console.log("MediaWrapper:_handleBlur");
     this.props.setReadOnly(false);
   }
 
   render() {
     return (
-      <div onBlur={this._handleBlur} onFocus={this._handleFocus}>
+      <div style={this.props.style} onBlur={this._handleBlur} onFocus={this._handleFocus}>
         {this.props.children}
       </div>
     );
